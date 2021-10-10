@@ -6,6 +6,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -21,11 +22,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        //创建一个用户赋予admin角色 表单输入的和这个用户相同(不加密密码情况下)就可以登录
-        auth.inMemoryAuthentication().withUser("admin").password("123").roles("admin");
-    }
+    //    @Override
+    //    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    //        //创建一个用户赋予admin角色 表单输入的和这个用户相同(不加密密码情况下)就可以登录
+    //        auth.inMemoryAuthentication().withUser("admin").password("123").roles("admin");
+    //    }
 
     //@Override
     //protected UserDetailsService userDetailsService() {
@@ -37,6 +38,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                .sessionManagement() //
+                    .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED) //默认创建会话
+                .and()
                 //允许表单登录
                 .formLogin()
                      //loginPage 指定登录页面会覆盖默认登陆页面
@@ -49,7 +53,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 //路径拦截
                 .authorizeRequests()//需要登陆路径request
                     .antMatchers("/loginPage", "/login").permitAll()//不需要登陆验证就可以访问的路径 permitAll 放行
-                    .antMatchers("/index").hasAnyRole("admin")//特别指出index需要认证并且需要admin权限才能访问
+//                    .antMatchers("/index").hasAnyRole("admin")//特别指出index需要认证并且需要admin权限才能访问
+                    .antMatchers("/index").hasAnyAuthority("p1")//特别指出index需要认证并且需要admin权限才能访问
                     .anyRequest().authenticated()//其他所有路径都需要认证
                 .and()
                 .csrf().disable();//关闭crsf跨域攻击
@@ -57,6 +62,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return NoOpPasswordEncoder.getInstance();
+        return new BCryptPasswordEncoder();
     }
 }

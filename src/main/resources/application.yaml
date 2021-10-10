@@ -1,0 +1,25 @@
+server:
+  port: 8080
+  servlet:
+    session:
+      cookie:
+        http-only: true  #浏览器脚本将无法访问cookie
+        secure: false    #则cookie将仅通过HTTPS连接发送
+      timeout: 3600s     #session 超时时间
+spring:
+  #  profiles:
+  #    active: prod
+  datasource:
+    username: root
+    password: 159629zxc
+    url: jdbc:mysql://localhost:3306/user?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+#mybatis
+mybatis-plus:
+  mapper-locations: classpath:/mapper/**/*.xml
+
+#打印sql 语句
+logging:
+  level:
+    com.phoenixhell.newsecurity: debug
