@@ -1,14 +1,8 @@
 package com.phoenixhell.newsecurity.service.impl;
 
-import com.phoenixhell.newsecurity.entity.RolePermission;
 import com.phoenixhell.newsecurity.entity.User;
-import com.phoenixhell.newsecurity.service.PermissionService;
-import com.phoenixhell.newsecurity.service.RolePermissionService;
-import com.phoenixhell.newsecurity.service.UserRoleService;
 import com.phoenixhell.newsecurity.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
