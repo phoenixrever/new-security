@@ -1,0 +1,8 @@
+com\phoenixhell\newsecurity\service\UserService.class
+com\phoenixhell\newsecurity\config\WebSecurityConfig.class
+com\phoenixhell\newsecurity\controller\IndexController.class
+com\phoenixhell\newsecurity\service\impl\MyUserDetailService.class
+com\phoenixhell\newsecurity\NewSecurityApplication.class
+com\phoenixhell\newsecurity\entity\User.class
+com\phoenixhell\newsecurity\service\impl\UserServiceImpl.class
+com\phoenixhell\newsecurity\mapper\UserMapper.class
