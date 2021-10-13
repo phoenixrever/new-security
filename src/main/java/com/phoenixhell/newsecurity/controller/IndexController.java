@@ -24,7 +24,7 @@ import java.util.List;
 public class IndexController {
 
     @PreAuthorize("hasAnyAuthority('p1')")
-    @GetMapping("/index")
+    @GetMapping({"/","/index"})
     public String index(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if(!authentication.isAuthenticated()){

@@ -7,8 +7,8 @@ server:
         secure: false    #则cookie将仅通过HTTPS连接发送
       timeout: 3600s     #session 超时时间
 spring:
-  profiles:
-    active: prod
+#  profiles:
+#    active: prod
   datasource:
     username: root
     password: root
